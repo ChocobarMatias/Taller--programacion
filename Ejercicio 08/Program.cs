@@ -29,8 +29,6 @@ namespace Ejercicio_08
             Console.WriteLine();
             int tamA = 0;
             int tamB = 0;
-            int contador = 0;
-            int aux = 0;
             Console.Write(" Ingresar el tamaño del Vector A = ");
             tamA = Int32.Parse(Console.ReadLine());//se coloca arriba del vector ya que el mismo depende de est variable
             int[] A = new int[tamA];//vector A de tamaño tamA
@@ -44,7 +42,7 @@ namespace Ejercicio_08
             //Genera Vector A
             Random aleatorio = new Random();//crea los elementos de los vectores aleatoriamente
 
-            for (int i = 0; i < tamA; i++)//crea vector A
+            for (int i = 0; i < A.Length; i++)//crea vector A
             {
                 Console.ForegroundColor = ConsoleColor.Blue;//cambia de color las letras
                 A[i] = aleatorio.Next(20);
@@ -58,7 +56,7 @@ namespace Ejercicio_08
             Console.Write("  A = [");
             Console.Write(string.Join(" , ", A));
             Console.WriteLine("] ");
-            for (int i = 0; i < tamB; i++)//crea vector B
+            for (int i = 0; i < B.Length; i++)//crea vector B
             {
                 Console.ForegroundColor = ConsoleColor.Red;//cambia de color las letras
                 B[i] = aleatorio.Next(20);
@@ -66,44 +64,6 @@ namespace Ejercicio_08
             Console.WriteLine();
             Console.Write("  B = [");
             Console.Write(string.Join(" , ", B));
-            Console.WriteLine("] ");
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.White;//cambia de color las letras
-            Console.WriteLine(" . Vector C [tamA + tamB] desordenado ");
-            Console.WriteLine("   ___________________________________");
-            Console.WriteLine();
-            Console.Write("  C = [");
-
-            for (int i = 0; i < (tamA + tamB); i++)//crea el vector C
-            {
-                if (i < tamA)
-                {
-                    if ((A[i] <= B[i]) && (aux >= A[i]))
-                    {
-                        aux = B[i];
-                        C[i] = A[i];
-                        C[i + 1] = B[i];
-                    }
-                    else
-                    {
-                        A[i] = aux;
-                        C[i] = B[i];
-                    }
-                  //  C[i] = A[i];
-                    
-                }
-                else
-                {
-                        if (i < (tamA + tamB))
-                        {
-                            C[i] = B[contador];
-
-                            contador++;
-                        }
-                    }
-              }
-
-            Console.Write(string.Join(" , ", C));
             Console.WriteLine("] ");
             Console.WriteLine();
             Console.WriteLine(" Presionar una tecla para continar y mostrar los vectores Ordenados .....");
@@ -132,6 +92,26 @@ namespace Ejercicio_08
             Console.WriteLine();
             Array.Sort(C);//ordena vector C de menor a mayor
             Console.Write("  C = [");
+           
+            for (int i = 0; i < C.Length; i++)//crea el vector C
+            {
+                int a = 0, b = 0;
+
+                for (int c = 0; c < C.Length; c++)
+                {
+                    if (a < A.Length && (b >= B.Length || A[a] < B[b]))
+                    {
+                        C[c] = A[a];
+                        a++;
+                    }
+                    else
+                    {
+                        C[c] = B[b];
+
+                        b++;
+                    }
+                }
+            }
             Console.Write(string.Join(" , ", C));
             Console.WriteLine("] ");
             Console.WriteLine();
