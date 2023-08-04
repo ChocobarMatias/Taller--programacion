@@ -101,18 +101,24 @@ namespace Ejercicio_08
                 {
                     if (a < A.Length && (b >= B.Length || A[a] < B[b]))
                     {
-                        C[c] = A[a];
-                        a++;
+                        if ((i == C.Length -1) && c < C.Length)
+                        {
+                            C[c] = A[a];
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write($" {A[a]}");
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            a++;
+                        }
                     }
                     else
                     {
                         C[c] = B[b];
-
+                        Console.Write($" {C[c]}");
                         b++;
                     }
                 }
             }
-            Console.Write(string.Join(" , ", C));
+            //Console.Write(string.Join(" , ", C));
             Console.WriteLine("] ");
             Console.WriteLine();
             Console.ReadKey();
